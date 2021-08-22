@@ -1,5 +1,5 @@
 # CamControl
-CamControl ist ein Hardware-Plugin, basierend auf einem ESP8266, zur Steuerung von beweglichen Überwachungskameras, die über EIA-485 und das Pelcon-D-Protokoll angesteuert werden.
+CamControl ist ein Hardware-Plugin, basierend auf einem ESP8266, zur Steuerung von beweglichen Überwachungskameras, die über EIA-485 und das Pelco "D"-Protokoll angesteuert werden.
 
 ## Funktionen
 Das Gerät verfügt über einen automatischen und manuellen Steuerungsmodus mit Presets.
