@@ -1,1 +1,165 @@
+<!--
+Tools:
+- SVG Optimizer:				https://jakearchibald.github.io/svgomg
+- Markup Validation Service:	http://validator.w3.org/
+- Mobil Test:					https://search.google.com/test/mobile-friendly
 
+Tipps:
+- Responsive Tipps:		https://kinsta.com/de/blog/responsiven-webdesign
+- Mobile Menu:			https://www.w3schools.com/howto/howto_js_curtain_menu.asp
+- Tablet Menu:			https://www.w3schools.com/howto/howto_js_collapse_sidebar.asp
+
+- - - - - - - - - - - - - - - - - - - - - -
+
+Todo:
+"""""
+
+CSS: Main layout with flexbox
+
+CSS: Loading Overlay
+
+Banner:
+	<script>
+		document.getElementById("demo").innerHTML = "Hello JavaScript!";
+	</script>
+	<noscript>Sorry, your browser does not support JavaScript!</noscript>
+
+Scroll To Top Button
+- https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
+
+Hilfe:
+- <abbr title="World Wide Web">WWW</abbr>
+- link: rel="help", ping Attribut -> statics.selatronic.com/add.php?id=xxxxxxx&type=click
+- Suche:
+	- Suchfunktion: https://developer.mozilla.org/en-US/docs/Web/API/Window/find
+	- Suchfeld: https://wiki.selfhtml.org/wiki/HTML/Tutorials/Formulare/Suchformulare
+				https://www.w3schools.com/howto/howto_js_search_menu.asp
+				https://www.w3schools.com/howto/howto_css_searchbar.asp
+
+Sprachen:
+	Dropdown:
+		https://wiki.selfhtml.org/wiki/JavaScript/Tutorials/zug%C3%A4ngliche_Dropdown-Navigation
+		<ul>
+		  <li><a hreflang="en" lang="en" href="?lang=en">English</a></li>
+		  <li><a hreflang="fr" lang="fr" href="?lang=fr">Français</a></li>
+		  <li><a hreflang="es" lang="es" href="?lang=es">Español</a></li>
+		</ul>
+	Sprachkürzel:
+		https://wiki.selfhtml.org/wiki/Sprachk%C3%BCrzel
+	Formular:
+		<form action="" method="get">
+		  <label for="language">Diese Seite in einer anderen Sprache:</label>
+		  <select id="language">
+			<option lang="en" value="en">English</option>
+			<option lang="es" value="es">Español</option>
+			<option lang="fr" value="fr">Français</option>
+			<option lang="re" value="ru">Русский</option>
+			<option lang="ar" value="ar">العربية</option>
+		  </select>
+		  <button>Ändern</button>
+		</form>
+
+Progressive Web App (PWA)
+
+Screenreader:
+	https://wiki.selfhtml.org/wiki/Sprachausgabe
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Camera 1 • CamControl</title>
+        <meta name="description" content="CamControl controls movable surveillance cameras.">
+        <meta name="author" content="Sebastian Lang">
+        <meta name="copyright" content="© 2021 Sebastian Lang">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="icon" type="image/svg+xml" href="img/favicon.svg" sizes="any">
+        <link rel="stylesheet" href="styles.css">
+        <script src="main.js" defer></script>
+    </head>
+    <body>
+        <div id="overlay">
+			<div id="loader"></div>
+			<div id="loading">Loading, please wait...</div>
+			<div id="restart">Rebooting, please wait...</div>
+		</div>
+        <div style="cursor:pointer;" onclick="waitForRestart()">Test: Overlay Loader</hdiv> <!-- ###Temp -->
+        <header>
+            <div id="menu-btn" onclick="toggleMenu()">
+                <div class="menu-btn1"></div>
+                <div class="menu-btn2"></div>
+                <div class="menu-btn3"></div>
+            </div>
+            <h1>Camera 1</h1>
+        </header>
+        <aside>
+            <nav id="menu">
+                <div id="menu-control" class="active" onclick="menuItemClicked(this)">
+					<img class="icon" src="img/control.svg" alt="control icon">
+					<div>Manual Control</div>
+				</div>
+                <div id="menu-presets" onclick="menuItemClicked(this)">
+					<img class="icon" src="img/presets.svg" alt="presets icon">
+					<div>Presets</div>
+				</div>
+            </nav>
+            <footer>
+                <div>Made with ❤️ in Trossingen</div>
+                <div>Powered by <a href="https://sebastianlang.net" target="_blank" rel="author">Sebastian Lang</a></div>
+            </footer>
+        </aside>
+        <main>
+            <div id="error" class="bnr">
+				<div class="bnr-msg">
+					<div id="err-01" style="display:block;"><strong>Error:</strong> JavaScript is disabled in your browser or for this website!</div>
+					<div id="err-02"><strong>Error:</strong> No connection to the server!</div>
+					<div id="err-03"><strong>Error:</strong> Terminal does not respond!</div>
+					<div id="err-04"><strong>Error:</strong> You do not have the rights to perform this action!</div>
+				</div>
+				<div>
+					<div class="bnr-close" onclick="closeBanner(this)">
+						<div class="bnr-close1"></div>
+						<div class="bnr-close2"></div>
+					</div>
+				</div>
+			</div>
+			<div id="info" class="bnr">
+				<div class="bnr-msg">
+					<div id="info-01"><strong>Info:</strong> Updates are available.</div>
+				</div>
+				<div>
+					<div class="bnr-close" onclick="closeBanner(this)">
+						<div class="bnr-close1"></div>
+						<div class="bnr-close2"></div>
+					</div>
+				</div>
+			</div>
+			<div id="success" class="bnr">
+				<div class="bnr-msg">
+					<div id="succ-01"><strong>Settings have been saved successfully.</div>
+					<div id="succ-02"><strong>The file was uploaded successfully.</div>
+				</div>
+				<div>
+					<div class="bnr-close" onclick="closeBanner(this)">
+						<div class="bnr-close1"></div>
+						<div class="bnr-close2"></div>
+					</div>
+				</div>
+			</div>
+            <section id="control">
+                <h2>Manual Control</h2>
+                <div class="d-pad">
+                    <img src="img/d-pad.svg"> <!-- ###Temp -->
+                </div>
+            </section>
+            <section id="presets">
+                <h2>Presets</h2>
+                <div class="presets">
+                    <button id="preset-1" onclick="loadPreset(this)">Preset 1</button>
+                    <button id="preset-2" onclick="loadPreset(this)">Preset 2</button>
+                    <button id="preset-3" onclick="loadPreset(this)">Preset 3</button>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
